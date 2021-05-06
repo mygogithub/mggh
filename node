@@ -1,0 +1,109 @@
+let inputValue = {
+  hired: {
+    be: {
+      to: {
+        deserve: 'I'
+      }
+    }
+  }
+};
+
+var Unit_Test_001_inputValue = {
+  chocolates: {
+    of: {
+      box: {
+        a: 'Life was like'
+      }
+    }
+  }
+};
+
+var Unit_Test_002_inputValue = {
+	know: {
+		never: 'you'
+	}
+};
+
+var Unit_Test_003_inputValue = {
+	get: {
+	  to: {
+	    going: {
+	      are: {
+	        you: 'what'
+	      }
+	    }
+	  }
+	}
+};
+
+var Unit_Test_004_inputValue = {
+  people: {
+    in: {
+      faith: {
+        have: 'You must always'
+      }
+    }
+  }
+};
+
+var Unit_Test_005_inputValue = {
+      'have faith in yourself': {
+        'you must always': 'and most importantly'
+      }
+};
+
+function reverse(input){
+  	var key_array = [];
+	var result = {};
+	var value = Object.keys(input)[0];
+	
+	input = input[Object.keys(input)[0]];
+
+  	while(Object.keys(input)[0] != "0"){
+  		key_array.push(Object.keys(input)[0]);
+  		input = input[Object.keys(input)[0]];
+  	}
+  	key_array.push(input);
+  	key_array = key_array.reverse();
+  	for(var i=key_array.length; i > 0; i-- ){
+	  var item = key_array[i-1];
+	  var temp_array = {};
+	  temp_array[item] = i == key_array.length ? value : {};
+	  if(i != key_array.length){
+	    Object.keys(result).forEach(r => {
+	      temp_array[item][r] = result[r];
+	    })
+	  }
+	  result = temp_array;
+	}
+
+	return result;
+}
+
+var outputValue = reverse(inputValue);
+var Unit_Test_001_inputValue = reverse(Unit_Test_001_inputValue);
+var Unit_Test_002_inputValue = reverse(Unit_Test_002_inputValue);
+var Unit_Test_003_inputValue = reverse(Unit_Test_003_inputValue);
+var Unit_Test_004_inputValue = reverse(Unit_Test_004_inputValue);
+var Unit_Test_005_inputValue = reverse(Unit_Test_005_inputValue);
+
+console.log(JSON.stringify(outputValue));
+console.log("Unit_Test: "+JSON.stringify(Unit_Test_001_inputValue));
+console.log("Unit_Test: "+JSON.stringify(Unit_Test_002_inputValue));
+console.log("Unit_Test: "+JSON.stringify(Unit_Test_003_inputValue));
+console.log("Unit_Test: "+JSON.stringify(Unit_Test_004_inputValue));
+console.log("Unit_Test: "+JSON.stringify(Unit_Test_005_inputValue));
+
+var Test_Coverage = 0;
+if(JSON.stringify(Unit_Test_001_inputValue) == '{"Life was like":{"a":{"box":{"of":"chocolates"}}}}')
+	Test_Coverage += 20;
+if(JSON.stringify(Unit_Test_002_inputValue) == '{"you":{"never":"know"}}')
+	Test_Coverage += 20;
+if(JSON.stringify(Unit_Test_003_inputValue) == '{"what":{"you":{"are":{"going":{"to":"get"}}}}}')
+	Test_Coverage += 20;
+if(JSON.stringify(Unit_Test_004_inputValue) == '{"You must always":{"have":{"faith":{"in":"people"}}}}')
+	Test_Coverage += 20;
+if(JSON.stringify(Unit_Test_005_inputValue) == '{"and most importantly":{"you must always":"have faith in yourself"}}')
+	Test_Coverage += 20;
+
+console.log("Test_Coverage: " + Test_Coverage + '%');
